@@ -1,5 +1,7 @@
 import React from 'react';
 import './AddAuthorForm.css';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class AuthorForm extends React.Component {
     constructor(props){
@@ -64,4 +66,13 @@ function AddAuthorForm({match, onAddAuthor}) {
     </div>
 }
 
-export default AddAuthorForm;
+function mapDispatchToProps(dispath, props){
+    return {
+        onAddAuthor: (author) => {
+            dispath({type: 'ADD_AUTHOR', author});
+            props.history.push('/');
+        }
+    };
+}
+
+export default withRouter(connect(() => {}, mapDispatchToProps)(AddAuthorForm));
