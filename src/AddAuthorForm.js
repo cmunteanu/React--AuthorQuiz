@@ -75,4 +75,4 @@ function mapDispatchToProps(dispath, props){
     };
 }
 
-export default withRouter(connect(() => {}, mapDispatchToProps)(AddAuthorForm));
+export default withRouter(connect(() => {return {}}, mapDispatchToProps)(AddAuthorForm));

@@ -88,7 +88,7 @@ function reducer(state = {authors, turnData: getTurnData(authors), highlight: ''
         case 'CONTINUE':
             return Object.assign({}, state, {
                 highlight: '',
-                turnData: getTurnData(authors)
+                turnData: getTurnData(state.authors)
             });
         case 'ADD_AUTHOR':
             return Object.assign({}, state, {
@@ -99,14 +99,12 @@ function reducer(state = {authors, turnData: getTurnData(authors), highlight: ''
     }
 }
 
-let store = Redux.createStore(reducer);
+let store = Redux.createStore(reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const AuthorWrapper = function(){
     return <ReactRedux.Provider store={store}> 
-        <AddAuthorForm onAddAuthor={(author) => {
-            authors.push(author);
-            history.push('/');
-        }} />
+        <AddAuthorForm />
         </ReactRedux.Provider>;
 };
 
